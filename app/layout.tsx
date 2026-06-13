@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/ui/providers/theme-provider";
 import { cn } from "@/lib/utils";
 import "./globals.css";
+import { ConvexClientProvider } from "@/components/ui/providers/convex-provider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -41,14 +42,16 @@ export default function RootLayout({
       )}
     >
       <body className="min-h-full flex flex-col">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+        <ConvexClientProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
+        </ConvexClientProvider>
       </body>
     </html>
   );

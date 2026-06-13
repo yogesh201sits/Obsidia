@@ -1,20 +1,30 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { Logo } from "./logo";
+import { useConvexAuth } from "convex/react";
 import { useScrollTop } from "@/hooks/use-scroll-top";
 import { ThemeToggle } from "@/components/mode-toggle";
+import { Spinner } from "@/components/spinner";
+import {
+  SignInButton,
+  SignUpButton,
+  UserButton,
+} from "@clerk/nextjs";
 
 export const Navbar = () => {
   const scrolled = useScrollTop(100);
   const [isOpen, setIsOpen] = useState(false);
 
+  const { isAuthenticated, isLoading } = useConvexAuth();
+
   return (
     <nav
-      className={`fixed top-0 left-0 w-full dark:bg-[#1F1F1F] z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 dark:bg-[#1F1F1F] ${
         scrolled
-          ? "bg-white/80 backdrop-blur-md shadow-md border-b"
+          ? "bg-white/80 dark:bg-[#1F1F1F]/80 backdrop-blur-md shadow-md border-b"
           : "bg-transparent"
       }`}
     >
@@ -23,21 +33,47 @@ export const Navbar = () => {
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-6">
-          <a href="#" className="hover:text-blue-600 transition-colors">
+          <Link
+            href="/"
+            className="text-sm font-medium hover:text-blue-600 transition-colors"
+          >
             Home
-          </a>
-          <a href="#" className="hover:text-blue-600 transition-colors">
+          </Link>
+
+          <Link
+            href="/about"
+            className="text-sm font-medium hover:text-blue-600 transition-colors"
+          >
             About
-          </a>
-          <a href="#" className="hover:text-blue-600 transition-colors">
-             <ThemeToggle/>
-          </a>
+          </Link>
+
+          <ThemeToggle />
+
+          {isLoading ? (
+            <Spinner size="sm" />
+          ) : isAuthenticated ? (
+            <UserButton  />
+          ) : (
+            <div className="flex items-center gap-2">
+              <SignInButton mode="modal">
+                <button className="px-4 py-2 rounded-md border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition">
+                  Log In
+                </button>
+              </SignInButton>
+
+              <SignUpButton mode="modal">
+                <button className="px-4 py-2 rounded-md bg-black text-white dark:bg-white dark:text-black hover:opacity-90 transition">
+                  Sign Up
+                </button>
+              </SignUpButton>
+            </div>
+          )}
         </div>
 
         {/* Mobile Menu Button */}
         <button
           className="md:hidden"
-          onClick={() => setIsOpen(!isOpen)}
+          onClick={() => setIsOpen((prev) => !prev)}
         >
           {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -46,19 +82,51 @@ export const Navbar = () => {
       {/* Mobile Menu */}
       <div
         className={`md:hidden overflow-hidden transition-all duration-300 ${
-          isOpen ? "max-h-60 border-t bg-white/95" : "max-h-0"
+          isOpen
+            ? "max-h-96 border-t bg-white dark:bg-[#1F1F1F]"
+            : "max-h-0"
         }`}
       >
-        <div className="flex flex-col p-4 space-y-4">
-          <a href="#" className="hover:text-blue-600">
+        <div className="flex flex-col p-4 gap-4">
+          <Link
+            href="/"
+            onClick={() => setIsOpen(false)}
+            className="hover:text-blue-600"
+          >
             Home
-          </a>
-          <a href="#" className="hover:text-blue-600">
+          </Link>
+
+          <Link
+            href="/about"
+            onClick={() => setIsOpen(false)}
+            className="hover:text-blue-600"
+          >
             About
-          </a>
-          <a href="#" className="hover:text-blue-600">
-            <ThemeToggle/>
-          </a>
+          </Link>
+
+          <ThemeToggle />
+
+          {isLoading ? (
+            <div className="flex justify-center py-2">
+              <Spinner size="sm" />
+            </div>
+          ) : isAuthenticated ? (
+            <UserButton />
+          ) : (
+            <div className="flex flex-col gap-2">
+              <SignInButton mode="modal">
+                <button className="w-full px-4 py-2 rounded-md border border-neutral-300 dark:border-neutral-700">
+                  Log In
+                </button>
+              </SignInButton>
+
+              <SignUpButton mode="modal">
+                <button className="w-full px-4 py-2 rounded-md bg-black text-white dark:bg-white dark:text-black">
+                  Sign Up
+                </button>
+              </SignUpButton>
+            </div>
+          )}
         </div>
       </div>
     </nav>
