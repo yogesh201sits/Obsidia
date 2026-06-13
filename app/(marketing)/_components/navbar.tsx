@@ -51,9 +51,16 @@ export const Navbar = () => {
 
           {isLoading ? (
             <Spinner size="sm" />
-          ) : isAuthenticated ? (
-            <UserButton  />
-          ) : (
+            ) : isAuthenticated ? (
+              <div className="flex items-center gap-3">
+                <Link href="/documents">
+                  <button className="px-4 py-2 rounded-md bg-black text-white dark:bg-white dark:text-black hover:opacity-90 transition">
+                    Enter Notes
+                  </button>
+                </Link>
+                <UserButton />
+              </div>
+            ) : (
             <div className="flex items-center gap-2">
               <SignInButton mode="modal">
                 <button className="px-4 py-2 rounded-md border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition">

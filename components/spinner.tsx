@@ -1,6 +1,6 @@
 "use client";
 
-import { Loader2 } from "lucide-react";
+import { Loader } from "lucide-react";
 import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
@@ -32,7 +32,7 @@ export const Spinner = ({
   className,
 }: SpinnerProps) => {
   return (
-    <Loader2
+    <Loader
       className={cn(
         spinnerVariants({ size }),
         className

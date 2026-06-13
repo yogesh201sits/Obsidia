@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/components/ui/providers/theme-provider";
 import { cn } from "@/lib/utils";
 import "./globals.css";
 import { ConvexClientProvider } from "@/components/ui/providers/convex-provider";
+import { Toaster } from "sonner";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -49,6 +50,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
+            <Toaster position="bottom-center"/>
             {children}
           </ThemeProvider>
         </ConvexClientProvider>
