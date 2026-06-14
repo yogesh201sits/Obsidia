@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Obsidia
 
-## Getting Started
+A collaborative notes app built with Next.js, Convex, and an Edgestore-backed file upload service.
 
-First, run the development server:
+This repository contains the web client (Next.js app router) and Convex functions/schema used by the app.
+
+## Features
+
+- Document editor with realtime updates via Convex
+- Cover image upload and management (Edgestore)
+- Icon picker, document listing, and simple publishing flow
+- Accessible UI primitives and modal dialogs
+
+## Tech stack
+
+- Next.js (App Router)
+- Convex for backend realtime & serverless functions
+- Edgestore for public file uploads
+- React, Zustand, Tailwind CSS
+
+## Prerequisites
+
+- Node.js 18+ (or your environment's required version)
+- npm or pnpm
+- A Convex project and credentials (for local development)
+
+## Local setup
+
+1. Install dependencies
+
+```bash
+npm install
+```
+
+2. Create `.env.local` with the required variables (examples):
+
+- `CONVEX_URL` — Convex deployment or local dev URL
+- `EDGESTORE_API_KEY` — Edgestore credentials
+
+3. Run Convex dev (if developing locally):
+
+```bash
+npx convex dev
+```
+
+4. Start the Next.js dev server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Notes:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- The app adds `files.edgestore.dev` to `next.config.ts` image remotePatterns. If you change upload hosts, update `next.config.ts`.
+- Some images are rendered with `unoptimized` to avoid Next.js proxying when the remote host resolves to private IPs.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Important files
 
-## Learn More
+- `app/` — Next.js routes and pages
+- `components/` — UI components & modals
+- `hooks/UseCoverImage.tsx` — local store for cover modal state
+- `lib/edgestore.ts` — Edgestore client wrapper
+- `convex/` — Convex schema and server functions
+- `next.config.ts` — Next.js configuration
 
-To learn more about Next.js, take a look at the following resources:
+## Cover image flow
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Click "Add cover" in the toolbar to open the `CoverImageModal`.
+2. Upload sends the file to Edgestore and returns a public URL.
+3. The Convex document record is updated with the URL and the `Cover` component displays it.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Contributing
 
-## Deploy on Vercel
+Create a branch, run the app and tests, then open a PR with a description of your changes.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## License
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+No license file is included. Add a `LICENSE` file if you wish to open-source this project.
+
+---
+
+If you'd like, I can add an `.env.local` template, README badges, or CI steps next.
+
