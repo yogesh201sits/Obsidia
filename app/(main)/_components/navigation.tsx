@@ -8,7 +8,7 @@ import { useUser } from "@clerk/nextjs";
 import {UserItem} from "./UserItem"
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
-import { useQuery,useMutation } from "convex/react";
+import { useMutation } from "convex/react";
 import { DocumentList } from "./DocumentList";
 import { api } from "@/convex/_generated/api";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
@@ -139,7 +139,6 @@ export const Navigation = () => {
         </div>
 
         <div className="p-4">
-          <p>Action items</p>
           <UserItem/>
           <Item 
             isSearch
@@ -159,8 +158,8 @@ export const Navigation = () => {
           />
         </div>
 
-        <div className="mt-4 p-4">
-          <div className="mt-4">
+        <div className="p-4">
+          <div className="mt-2">
           <DocumentList />
           <Item
             onClick={handleCreate}

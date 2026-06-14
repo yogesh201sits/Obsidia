@@ -49,7 +49,7 @@ export const SearchCommand = () => {
    <CommandDialog open={isOpen} onOpenChange={onClose}>
   <Command>
     <CommandInput
-      placeholder={`Search ${user?.fullName}'s Jotion...`}
+      placeholder={`Search ${user?.fullName}'s Obsidia...`}
     />
 
     <CommandList>

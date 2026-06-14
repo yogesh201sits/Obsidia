@@ -39,7 +39,7 @@ export const UserItem = () => {
             </Avatar>
 
             <span className="text-start font-medium line-clamp-1">
-              {user?.fullName ?? "User"}&apos;s Jotion
+              {user?.fullName ?? "User"}&apos;s Obsidia
             </span>
           </div>
 
@@ -70,7 +70,7 @@ export const UserItem = () => {
 
             <div className="space-y-1">
               <p className="text-sm line-clamp-1">
-                {user?.fullName ?? "User"}&apos;s Jotion
+                {user?.fullName ?? "User"}&apos;s Obsidia
               </p>
             </div>
           </div>
