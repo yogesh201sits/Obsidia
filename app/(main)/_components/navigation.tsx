@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronsLeft,Menu, Plus, PlusCircle, Search, Settings, Trash} from "lucide-react";
+import { ChevronsLeft,Menu, Plus, PlusCircle, Search, Settings, Trash,MenuIcon} from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { useMediaQuery } from "usehooks-ts";
@@ -16,8 +16,10 @@ import { Item } from "./Item";
 import { TrashBox } from "./trash-box";
 import { useSearch } from "@/hooks/UseSearch";
 import { useSettings } from "@/hooks/UseSettings";
+import { Navbar } from "./navbar";
 
 export const Navigation = () => {
+  const params = useParams();
   const setting = useSettings();
   const search = useSearch();
   const pathname = usePathname();
@@ -187,22 +189,29 @@ export const Navigation = () => {
       </aside>
 
       <div
-        ref={navbarRef}
-        className={cn(
-          "absolute top-0 left-60 w-[calc(100%-240px)]",
-          isResetting && "transition-all duration-300 ease-in-out"
-        )}
-      >
-        {/* mobile open button */}
-        {isCollapsed && (
-          <nav className="p-2">
-           <Menu
-            role="button"
-            onClick={resetWidth}
-            className="h-6 w-6 text-muted-foreground hover:text-black transition"
+          ref={navbarRef}
+          className={cn(
+            "absolute top-0 z-[99999] left-60 w-[calc(100%-240px)]",
+            isResetting && "transition-all ease-in-out duration-300",
+            isMobile && "left-0 w-full"
+          )}
+        >
+          {!!params.documentId ? (
+            <Navbar
+              isCollapsed={isCollapsed}
+              onResetWidth={resetWidth}
             />
-          </nav>
-        )}
+          ) : (
+            <nav className="bg-transparent px-3 py-2 w-full">
+              {isCollapsed && (
+                <MenuIcon
+                  onClick={resetWidth}
+                  role="button"
+                  className="h-6 w-6 text-muted-foreground"
+                />
+              )}
+            </nav>
+          )}
       </div>
     </>
   );
