@@ -6,8 +6,7 @@ import { useParams } from "next/navigation";
 
 import {
   Dialog,
-  DialogContent,
-  DialogHeader,
+  DialogContent,  DialogDescription,  DialogHeader,
   DialogTitle
 } from "@/components/ui/dialog";
 import { useCoverImage } from "@/hooks/UseCoverImage";
@@ -61,6 +60,9 @@ export const CoverImageModal = () => {
             Cover Image
           </h2>
         </DialogHeader>
+        <DialogDescription>
+          Upload a cover image to display at the top of the document.
+        </DialogDescription>
         <SingleImageDropzone
           className="w-full outline-none"
           disabled={isSubmitting}

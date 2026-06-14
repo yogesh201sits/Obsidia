@@ -1,51 +1,55 @@
-"use client";
+"use client"
 
 import Image from "next/image";
 import { useUser } from "@clerk/nextjs";
-import { Button } from "@/components/ui/button";
 import { PlusCircle } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { useMutation } from "convex/react";
+import { toast } from "sonner";
 import { api } from "@/convex/_generated/api";
-import {toast} from "sonner";
+import { useRouter } from "next/navigation";
 
-const DocumentPage = () => {
-    const { user, isLoaded } = useUser();
-    const create = useMutation(api.documents.create);
-    const onCreate = ()=>{
-        const promise = create({title:"Untitled"});
-        toast.promise(promise,{
-            loading:"Creating a new note...",
-            success:"New note created",
-            error:"Failed to create new note"
-        })
-    }
+const DocumentsPage = () => {
+  const router = useRouter();
+  const { user } = useUser();
+  const create = useMutation(api.documents.create);
+
+  const onCreate = () => {
+    const promise = create({ title: "Untitled" })
+      .then((documentId) => router.push(`/documents/${documentId}`))
+
+    toast.promise(promise, {
+      loading: "Creating a new note...",
+      success: "New note created!",
+      error: "Failed to create a new note."
+    });
+  };
+
   return (
-    <div className="h-full flex flex-col items-center justify-center gap-4">
+    <div className="h-full flex flex-col items-center justify-center space-y-4">
       <Image
         src="/empty.png"
-        alt="Empty page"
-        width={300}
-        height={300}
-        className="rounded-lg dark:hidden"
+        height="300"
+        width="300"
+        alt="Empty"
+        className="dark:hidden"
       />
-
       <Image
         src="/empty-dark.png"
-        alt="Empty page dark"
-        width={300}
-        height={300}
-        className="rounded-lg hidden dark:block"
+        height="300"
+        width="300"
+        alt="Empty"
+        className="hidden dark:block"
       />
-
       <h2 className="text-lg font-medium">
-        {isLoaded ? `Welcome to ${user?.firstName ?? "User"}` : "Loading..."}&apos; Obsidia
+        Welcome to {user?.firstName}&apos;s Jotion
       </h2>
       <Button onClick={onCreate}>
-        <PlusCircle/>
+        <PlusCircle className="h-4 w-4 mr-2" />
         Create a note
       </Button>
     </div>
   );
-};
-
-export default DocumentPage;
+}
+ 
+export default DocumentsPage;

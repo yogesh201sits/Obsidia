@@ -50,6 +50,7 @@ export const Cover = ({
           fill
           alt="Cover"
           className="object-cover"
+          unoptimized
         />
       )}
       {url && !preview && (
