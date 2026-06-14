@@ -12,9 +12,9 @@ import { Banner } from "./banner";
 import { Menu } from "./menu";
 import { Publish } from "./publish";
 
-interface NavbarProps {
+interface NavbarProps {  
   isCollapsed: boolean;
-  onResetWidth: () => void;
+  onResetWidth: () => void;   
 };
 
 export const Navbar = ({
