@@ -7,13 +7,7 @@ import { toast } from "sonner";
 import { MoreHorizontal, Trash } from "lucide-react";
 
 import { Id } from "@/convex/_generated/dataModel";
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator
-} from "@/components/ui/dropdown-menu";
+import {DropdownMenu,DropdownMenuTrigger, DropdownMenuContent,DropdownMenuItem, DropdownMenuSeparator} from "@/components/ui/dropdown-menu";
 import { api } from "@/convex/_generated/api";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -65,6 +59,7 @@ export const Menu = ({
         </div>
       </DropdownMenuContent>
     </DropdownMenu>
+    
   );
 };
 
