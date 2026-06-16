@@ -73,11 +73,6 @@ Notes:
 
 Create a branch, run the app and tests, then open a PR with a description of your changes.
 
-## License
-
-No license file is included. Add a `LICENSE` file if you wish to open-source this project.
-
----
 
 
 
