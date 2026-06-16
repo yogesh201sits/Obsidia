@@ -1,0 +1,9 @@
+Obsidia – Content Collaboration Platform
+
+Team Size: 1
+
+Key Skills: Next.js Convex React.js TypeScript realtime collaboration
+
+Project Link: https://github.com/yogesh201sits/obsidia-Developed a collaborative content editor with document creation, publishing, and realtime sync
+with shared document workflows and channel-based navigation.-Architected a production-style frontend/backend integration using Convex for secure state sync,
+dynamic session handling, and live collaborative document updates.-Built a React-based workspace with editor controls, live preview, and concurrent collaboration support

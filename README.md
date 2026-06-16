@@ -79,5 +79,5 @@ No license file is included. Add a `LICENSE` file if you wish to open-source thi
 
 ---
 
-If you'd like, I can add an `.env.local` template, README badges, or CI steps next.
+
 
