@@ -10,8 +10,8 @@ const font = Poppins({
 export const Logo = ()=>{
     return (
         <div className="hidden md:flex items-center gap-x-2">
-            <Image src="/logo.svg" height="40" width="40" alt="logo" className="dark:hidden" />
-            <Image src="/logo-dark.svg" height="40" width="40" alt="logo" className="hidden dark:block" />
+            <Image src="/logo-dark-1.png" height="40" width="40" alt="logo" className="dark:hidden" />
+            <Image src="/logo-light-1.png" height="40" width="40" alt="logo" className="hidden dark:block" />
             <p className={cn("font-semibold",
                 font.className)}>
                 Obsidia
